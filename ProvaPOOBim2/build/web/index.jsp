@@ -14,17 +14,36 @@
     </head>
     <body>
         <h1>Usuários</h1>
+        <form>
+        <input type="text" name="name">
+        <input type="submit" name="inserir" value="Inserir Disciplina">
+        </form>
+        <hr>
         
         <% if(NewServletListener.exception!=null) { %>
         <hr>
         <div style="color:red"><%= NewServletListener.exception.getMessage() %> </div>
         <% } %>
         
+        <table border="1">
         <% for(String Disciplina: NewServletListener.getNameDisciplina()) { %>
         
-        <div> <%= Disciplina %> </div>
+        <tr>
+            <th>Nome</th>
+            <th>Ações</th>
         
+        </tr>
+        
+        <tr>
+            <td> <%= Disciplina %> </div></td>
+            <td>
+                <form>
+                <input type="hidden" name="name" value="<%=Disciplina %>">
+                <input type="submit" name="delete" value="Excluir"></td>
+                </form>    
         <% } %>
+        </tr>
+        </table>
         
     </body>
 </html>
