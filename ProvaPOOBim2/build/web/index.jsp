@@ -4,8 +4,39 @@
     Author     : Leandro
 --%>
 
+<%@page import="com.fatecpg.model.Disciplina"%>
 <%@page import="com.fatecpg.listener.NewServletListener"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+String errorMessage = null;
+
+try{
+    if(request.getParameter("inserir")!=null){
+        String name = request.getParameter("name");
+        if(name!=""){
+            Disciplina.insertDisciplina(name);
+            response.sendRedirect(request.getRequestURI());
+        }else{    
+        } 
+    }
+    } catch(Exception ex){
+            errorMessage = "Erro ao inserir nova Disciplina"+ex.getMessage();
+    }
+
+try{
+    if(request.getParameter("delete")!=null){
+        String name = request.getParameter("name");
+        Disciplina.deleteDisciplina(name);
+        response.sendRedirect(request.getRequestURI());
+    }
+    } catch(Exception ex){
+            errorMessage = "Erro ao inserir nova Disciplina"+ex.getMessage();
+    }
+
+
+%>
+            
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,14 +57,13 @@
         <% } %>
         
         <table border="1">
-        <% for(String Disciplina: NewServletListener.getNameDisciplina()) { %>
-        
+
         <tr>
             <th>Nome</th>
             <th>Ações</th>
         
         </tr>
-        
+        <% for(String Disciplina: NewServletListener.getNameDisciplina()) { %>
         <tr>
             <td> <%= Disciplina %> </div></td>
             <td>
